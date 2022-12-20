@@ -87,7 +87,7 @@
 
     color_map_70752076b6342bd7f6a94d13dfb8965a.x = d3.scale.linear()
               .domain([6.0, 280.0])
-              .range([0, 450 - 50]);
+              .range([0, 200]);
 
     color_map_70752076b6342bd7f6a94d13dfb8965a.legend = L.control({position: 'topright'});
     color_map_70752076b6342bd7f6a94d13dfb8965a.legend.onAdd = function (map) {var div = L.DomUtil.create('div', 'legend'); return div};
@@ -101,7 +101,7 @@
 
     color_map_70752076b6342bd7f6a94d13dfb8965a.svg = d3.select(".legend.leaflet-control").append("svg")
         .attr("id", 'legend')
-        .attr("width", 450)
+        .attr("width", 250)
         .attr("height", 60);
 
     color_map_70752076b6342bd7f6a94d13dfb8965a.g = color_map_70752076b6342bd7f6a94d13dfb8965a.svg.append("g")
@@ -126,7 +126,7 @@
         .attr("class", "caption")
         .attr("y", 26)
         .attr("fill","white")
-        .attr("font-size","18")
+        .attr("font-size","16")
         .text("Capacità di accoglienza - num. di persone");
     
             var circle_marker_071f7eed2593c016d701259d636b4b2e = L.circleMarker(
