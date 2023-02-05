@@ -19,3 +19,7 @@ Questi li consideriamo fuorisede – cioè quelli che sono originari della provi
 Dividiamo queste quantità per il numero totale di studenti originari di quella provincia per avere delle proporzioni.<br>
 <br>
 https://savaij.github.io/uni_fuorisede/mappe/mappa_partenze.html
+
+
+
+<h3> IMPORTANTE:</h3> Nella cartella <i>mappe_real</i> ci sono le stesse mappe di qui sopra ma abbiamo <b>escluso</b> dal conto quelli che hanno la residenza in una provincia e studiano in una provincia DIVERSA MA CONFINANTE. In questo modo proviamo a eliminare i pendolari (anche se sopratutto al sud, essendo le province molto grandi, non ci sono molti pendolari che fanno avanti e indietro tra due province). Però in generale in questo modo vediamo quali sono le province che attirano gente meno "locale", quindi quelle che sono veramente più attrattive (spoiler: le province del nord attirano più gente)
