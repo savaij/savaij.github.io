@@ -4,4 +4,4 @@
  <b>Gli altri file sono solo di supporto, utilizzati nel codice python usato per creare il file csv</b>
  <br><br>
  
- Nel conteggio abbiamo usato solo i "real_fuorisede", quindi escludendo i possibili pendolari. 
+ Nel conteggio abbiamo usato solo i "real_fuorisede", quindi escludendo i possibili pendolari. Questo però alza le statistiche per le regioni del sud che normalmente hanno province più grandi. Però i trend di crescita/decrescita nel tempo rimangono sempre gli stessi a prescindere dal tipo di conteggio.
