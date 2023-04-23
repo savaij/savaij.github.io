@@ -1,0 +1,132 @@
+<html>
+
+<head>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+	<script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+	<script src="http://code.jquery.com/jquery-3.3.1.slim.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js" integrity="sha512-OFs3W4DIZ5ZkrDhBFtsCP6JXtMEDGmhl0QPlmWYBJay40TT1n3gt2Xuw8Pf/iezgW9CdabjkNChRqozl/YADmg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css" integrity="sha512-6ZCLMiYwTeli2rVh3XAPxy3YoR5fVxGdH/pz+KMCzRY2M65Emgkw00Yqmhh8qLGeYQ3LbVZGdmOX9KUjSKr0TA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script src="https://cdn.jsdelivr.net/npm/leaflet.markercluster.placementstrategies@0.2.1/dist/leaflet-markercluster.placementstrategies.js"></script>
+
+	<meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+	<style type="text/css">
+		#map {
+                    position: absolute;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                    z-index: 1;
+                }
+
+.leaflet-tooltip {
+    position: absolute;
+    padding: 6px;
+    background-color: #fff;
+    border: 1px solid #fff;
+    border-radius: 3px;
+    color: #222;
+    white-space: break-spaces;
+    width: 200px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    pointer-events: none;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    }
+
+.leaflet-div-icon2
+{
+  background:#deb400;
+  font-weight:bold;
+  text-align:center;
+  border-radius:50%;
+  line-height:30px;
+}
+
+.image-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+}
+
+	</style>
+</head>
+<body>
+
+	<div id="map" ></div>
+	<img src="https://violencespolicieres.fr/_nuxt/images/VP-logo-color@512-9c85ba.png" style="z-index: 2; background-color: transparent; width: 10%; position: fixed; top: 0.0">  
+
+
+	<script type="text/javascript"> 
+
+		var map = L.map(
+                "map",
+                { 
+                    center: [39.0, -98.0],
+                    crs: L.CRS.EPSG3857,
+                    zoom: 4,
+                    zoomControl: false,
+                    preferCanvas: false,
+                }
+            );
+
+		var tile_layer = L.tileLayer(
+                "https://api.mapbox.com/styles/v1/sdrogolover/clbqph58m005o14peywwumib5/tiles/256/{z}/{x}/{y}@2x?access_token=pk.eyJ1Ijoic2Ryb2dvbG92ZXIiLCJhIjoiY2t3ejl2aHZsMDNhNTJ2bzVrbzltOWpoNCJ9.K3BzOmLokejL_T7NkQW0Ew",
+                {"attribution": "me", "detectRetina": false, "maxNativeZoom": 18, "maxZoom": 18, "minZoom": 0, "noWrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            ).addTo(map);
+
+
+		(async function() {
+
+		var descrizione = await fetch("https://raw.githubusercontent.com/savaij/map/main/provvisori.json").then( response => response.json().then(data => descrizione = data))
+
+		var lunghezza = Object.entries(descrizione['Latitude']).length
+
+		var clstr = L.markerClusterGroup({
+			iconCreateFunction: function(cluster) {
+				var todos = cluster.getAllChildMarkers();
+				var n=0;
+				for (let i = 0; i < todos.length; i++) {
+					n += todos[i].conto;
+				};
+				var size = Math.min(n/2,50)
+				return L.divIcon({
+				  className: 'leaflet-div-icon2',
+				  html: `<b class="image-text"> ${n} <b>`,
+				  iconSize: [size,size]
+				  }
+			);
+		},disableClusteringAtZoom: 8,
+		 elementsPlacementStrategy: "spiral",
+		 showCoverageOnHover: false,
+		});
+
+		for (let i=0; i<lunghezza; i++) {
+			var lat = descrizione['Latitude'][i];
+			var lng = descrizione['Longitude'][i];
+			var desc = descrizione['Location of death'][i]
+			var marker = L.circleMarker([lat,lng], {radius: 4,
+    fillColor: "#deb400",
+    color: "#000",
+    weight: 1,
+    opacity: 1,
+    fillOpacity: 0.8,
+  });
+			marker.conto = descrizione['Total Number of Dead and Missing'][i]
+			marker.bindTooltip(`<div> <font size="3" > <b>Luogo:</b> ${desc}<br>
+				<b> Numero di morti e dispersi: </b> ${marker.conto} </font> </div>`);
+			marker.addTo(clstr);}
+
+		clstr.addTo(map);
+
+	})();
+
+	</script>
+</body>
+</html>
