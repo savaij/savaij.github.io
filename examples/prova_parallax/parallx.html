@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Prova parallax</title>
+<style type="text/css">
+	
+	.parallax {
+		background-attachment: fixed;
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		margin: 0px;
+		padding: 0px;
+	}
+
+	.maschera {
+		background-color: #000;
+		opacity: 0.0;
+		transition: 2s;
+	}
+
+	.didascalia {
+		visibility: hidden;
+		padding:0;
+		margin:0;
+		position:relative;
+		bottom: calc(50% + 2em);
+		text-align: center;
+	}
+
+	.parallax:hover .maschera{
+		opacity:0.4;
+	}
+
+	.parallax:hover .didascalia {
+		visibility: visible;
+	}
+
+</style>
+
+</head>
+<body style="margin:0; overflow-x: hidden;">
+
+<div class="parallax" style="background-image: url(https://scomodo.org/wp-content/uploads/2023/07/X_Town_Piombino001-scaled.jpg); height:100vh;">
+	
+	<div class="maschera" style="height: 100%; width: 100%;"></div>
+	<div class="didascalia" style="font-size: 2em; color:#fff; position: relative;">Didascalia1</div>
+
+</div>
+
+
+<div class="parallax" style="background-image: url(https://scomodo.org/wp-content/uploads/2023/07/X_Town_Piombino004-scaled.jpg); height:100vh;">
+	
+	<div class="maschera" style="height: 100%; width: 100%;"></div>
+	<div class="didascalia" style="font-size: 2em; color:#fff; position: relative;">Didascalia2</div>
+
+</div>
+
+<div class="parallax" style="background-image: url(https://scomodo.org/wp-content/uploads/2023/07/X_Town_Piombino016-scaled.jpg); height:100vh;">
+	<div class="maschera" style="height: 100%; width: 100%;"></div>
+	<div class="didascalia" style="font-size: 2em; color:#fff; position: relative;">Didascalia3</div>
+
+</div>
+
+
+</body>
+</html>
