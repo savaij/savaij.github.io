@@ -77533,10 +77533,14 @@
 </script>
 
 <script type="text/javascript"> 
-  $(window).on('load', ()=>{$('[title="start layout"]').click()});
+  function click_button() {$('.ipysigma-layout-button').click()}
 setTimeout(
     // Il tuo codice qui
-    ()=>{$('[title="start layout"]').click()},3000)</script>
+    click_button,1000);
+setTimeout(
+    // Il tuo codice qui
+    click_button,2000)
+  </script>
 
 </body>
 </html>
