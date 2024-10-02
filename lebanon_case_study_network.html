@@ -77532,15 +77532,34 @@
 {"version_major": 2, "version_minor": 0, "model_id": "f802c6a9ab684ad2b1d79c4267ecd119"}
 </script>
 
+<script type="text/javascript">
+  setTimeout(function() {
+        $('.ipysigma-layout-button').click();
+    }, 3000);
+</script>
+
 <script type="text/javascript"> 
-  function click_button() {$('.ipysigma-layout-button').click()}
-setTimeout(
-    // Il tuo codice qui
-    click_button,1000);
-setTimeout(
-    // Il tuo codice qui
-    click_button,2000)
+
+function click_button() {
+    $('.ipysigma-layout-button').click();  // Esegui il primo click
+}
+
+// Crea un'istanza di MutationObserver
+const observer = new MutationObserver((mutationsList, observer) => {
+    // Verifica se l'elemento è visibile
+    const button = $('.ipysigma-layout-button');
+    if (button.length && button.is(':visible')) {
+        click_button();  // Esegui il click
+        observer.disconnect();  // Interrompi l'osservazione
+    }
+});
+
+
   </script>
+
+<script type="text/javascript">    setTimeout(function() {
+        $('.ipysigma-layout-button').click();  // Esegui il secondo click
+    }, 2000);</script>
 
 </body>
 </html>
